@@ -62,12 +62,12 @@ const NavBar = (props) => {
                 </Typography>
                 <List>
                     {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <div>
-                            <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
+                        <div key={index}>
+                            <ListItem button key={text+index}>
+                                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                                <ListItemText primary={text} />
                             </ListItem>
-                            <Divider />
+                            <Divider key={index} />
                         </div>
                     ))}
                 </List>

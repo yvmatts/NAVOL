@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Scheduler from '../../Components/Scheduler';
+import Scheduler from '../../Components/SchedulerComponent/Scheduler';
 
 class HomePage extends Component {
     constructor(props) {
