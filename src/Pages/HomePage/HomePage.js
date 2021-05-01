@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Scheduler from '../../Components/Scheduler';
 
 class HomePage extends Component {
     constructor(props) {
@@ -8,7 +9,7 @@ class HomePage extends Component {
     render() { 
         return (  
             <div>
-                HomePage
+                <Scheduler />
             </div>
         );
     }
