@@ -56,12 +56,6 @@ const NavBar = (props) => {
             duration: theme.transitions.duration.enteringScreen,
             }),
         },
-        menuButton: {
-            marginRight: theme.spacing(2),
-        },
-        hide: {
-            display: 'none',
-        },
         drawer: {
             width: drawerWidth,
             flexShrink: 0,
@@ -77,25 +71,27 @@ const NavBar = (props) => {
             ...theme.mixins.toolbar,
             justifyContent: 'flex-end'
         },
-        content: {
-            flexGrow: 1,
-            padding: theme.spacing(3),
-            transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-            }),
-            marginLeft: -drawerWidth,
+        menuButton: {
+            marginRight: theme.spacing(2),
         },
-        contentShift: {
-            transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginLeft: 0,
+        hide: {
+            display: 'none',
+        },
+        navProfile: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: '20px',
+            marginBottom: '20px'
         },
         navLink: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
             textDecoration: 'none',
-            color: '#252525'
+            color: '#252525',
+            marginLeft: '20px',
+            // marginRight: 'auto'
         }
     }));
 
@@ -103,7 +99,12 @@ const NavBar = (props) => {
 
 
 /////// JSX ///////
-let toolBar = '';
+
+/*
+* Check if user is logged in or not
+* @params : props.isLoggedIn (Boolean)
+*/
+    let toolBar = '';
     if(props.isLoggedIn === true){
         toolBar = (
             <div>
@@ -157,11 +158,13 @@ let toolBar = '';
             </IconButton>
             </div>
             <Divider />
-            <div>
+            <div className = {classes.navProfile}>
                 <Avatar>
                     <AccountCircleOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h6">
+            </div>
+            <div className = {classes.navProfile}>
+                <Typography component="h1" variant="h5">
                     Yashvardhan Mathur
                 </Typography>
             </div>
@@ -169,7 +172,7 @@ let toolBar = '';
                 {
                     routes.map((item) => {
                         return(
-                            <NavLink to={'/' + item.path.toLowerCase()} className={classes.navLink}>
+                            <NavLink to={'/' + item.path.toLowerCase()} className={classes.navLink} key = {item.path}>
                                 <ListItem button key={item.path.toLowerCase()}>
                                     <ListItemIcon> {item.icon} </ListItemIcon>
                                     <ListItemText primary={item.path}/>
