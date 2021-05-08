@@ -1,17 +1,26 @@
 import './App.css';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import AppBar from './Components/AppBar';
 import LoginPage from './Pages/LoginPage/LoginPage';
 import React, { useState } from 'react';
-import HomePage from './Pages/HomePage/HomePage';
+import Dashboard from './Pages/Dashboard/Dashboard';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div>
-      <AppBar isLoggedIn = {isLoggedIn} />
-      {!isLoggedIn && <LoginPage isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn} />}
-      {isLoggedIn && <HomePage />}
+      <Router>
+        <AppBar isLoggedIn = {isLoggedIn} />
+        <Switch>
+          <Route exact path = "/">
+            {!isLoggedIn && <LoginPage isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn} />}
+          </Route>
+          <Route path = "/dashboard">
+            {isLoggedIn && <Dashboard />}
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

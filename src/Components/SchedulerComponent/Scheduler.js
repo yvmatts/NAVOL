@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import '../styles/Scheduler.css';
+import './styles/Scheduler.css'
 import {Inject, ScheduleComponent, Day, Week, ICalendarExport, ViewsDirective, ViewDirective, Resize, DragAndDrop } from '@syncfusion/ej2-react-schedule';
-import { extend } from '@syncfusion/ej2-base';
-import * as dataSource from './dataSource.json';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import SaveIcon from '@material-ui/icons/Save';
 //Scheduler functions
 
 
 class Scheduler extends Component {
-    constructor(props) {
-        super(props);
-        this.data = extend([], dataSource.scheduleData, null, true);
-    }
     handClick = () =>{
         this.scheduleObj.exportToICalendar();
     }
@@ -29,13 +24,27 @@ class Scheduler extends Component {
                     </ViewsDirective>
                     <Inject services={[Day,Week,ICalendarExport,Resize,DragAndDrop]} />
                 </ScheduleComponent>
-                <Button
-                    variant="contained"
-                    startIcon={<CloudUploadIcon />}
-                    onClick={this.handClick}
-                >
-                    Update Calender
-                </Button>
+                <div className="row">
+                    <div className="upload_btn">
+                        <Button
+                            variant="contained"
+                            startIcon={<CloudUploadIcon />}
+                        >
+                            Update
+                        </Button>
+                    </div>
+                    <div className="upload_btn">
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            startIcon={<SaveIcon />}
+                            onClick={this.handClick}
+                        >
+                            Save
+                        </Button>
+                    </div>
+                </div>
+                
             </div>
          );
     }

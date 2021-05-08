@@ -8,11 +8,14 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Avatar from '@material-ui/core/Avatar';
- const LoginPage = () => {
+ const LoginPage = (props) => {
+     const handleClick = () => {
+         props.setIsLoggedIn(true);
+     }
     return ( 
-        <Container maxWidth="xs">
-            <div className="outerContainer">
-                <Avatar>
+        <Container className="outerContainer" maxWidth="xs">
+            <div>
+                <Avatar className="loginAvatar">
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
@@ -50,6 +53,7 @@ import Avatar from '@material-ui/core/Avatar';
                         fullWidth
                         variant="contained"
                         color="primary"
+                        onClick={handleClick}
                     >
                         Sign In
                     </Button>

@@ -8,3 +8,16 @@
 @import "/node_modules/@syncfusion/ej2-popups/styles/material.css";
 @import "/node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
 @import "/node_modules/@syncfusion/ej2-react-schedule/styles/material.css";
+
+.container {
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 25px;
+}
+.upload_btn {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    float: right
+}

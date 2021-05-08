@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Scheduler from '../../Components/SchedulerComponent/Scheduler';
 
-class HomePage extends Component {
+class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
@@ -15,4 +15,4 @@ class HomePage extends Component {
     }
 }
  
-export default HomePage;
+export default Dashboard;
