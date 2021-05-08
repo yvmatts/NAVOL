@@ -1,6 +1,7 @@
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import CreateIcon from '@material-ui/icons/Create';
 import SchoolIcon from '@material-ui/icons/School';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 export const routes = [
     {
       path: "Dashboard",
@@ -13,6 +14,10 @@ export const routes = [
     {
       path: "Exam",
       icon: <CreateIcon />
+    },
+    {
+      path: "Profile",
+      icon: <AccountBoxIcon />
     }
   ];
 
