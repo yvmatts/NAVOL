@@ -39,8 +39,11 @@ const NavBar = (props) => {
     const useStyles = makeStyles((theme) => ({
         root: {
             display: 'flex',
-            marginBottom: '45px'
+            marginBottom: '60px'
         },
+        toolbar: {
+            paddingRight: 24, 
+          },
         appBar: {
             transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
@@ -74,7 +77,7 @@ const NavBar = (props) => {
             padding: theme.spacing(0, 1),
             // necessary for content to be below app bar
             ...theme.mixins.toolbar,
-            justifyContent: 'flex-end',
+            justifyContent: 'flex-end'
         },
         content: {
             flexGrow: 1,
@@ -95,6 +98,11 @@ const NavBar = (props) => {
         navLink: {
             textDecoration: 'none',
             color: '#252525'
+        },
+        avatar: {
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            textAlign: 'center'
         }
     }));
 
@@ -102,71 +110,89 @@ const NavBar = (props) => {
 
 
 /////// JSX ///////
-    return (
-        <div className={classes.root}>
-           <AppBar 
-                className={clsx(classes.appBar, {
-                    [classes.appBarShift]: open,
-                  })}
-            >
-                <Toolbar variant="dense">
-                {
-                    props.isLoggedIn 
-                        && 
-                    <IconButton 
-                        edge="start" 
-                        color="inherit" 
-                        aria-label="menu" 
-                        onClick={handleDrawerOpen} 
+let toolBar = '';
+    if(props.isLoggedIn === true){
+        toolBar = (
+            <div>
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        edge="start"
                         className={clsx(classes.menuButton, open && classes.hide)}
                     >
                         <MenuIcon />
                     </IconButton>
-                }
+                    <Typography variant="h6" noWrap>
+                        Dashboard
+                    </Typography>   
                 </Toolbar>
-            </AppBar>
-            <Drawer
-                className={classes.drawer}
-                variant="persistent"
-                anchor="left"
-                open={open}
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-            >
-                <div className={classes.drawerHeader}>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </div>
-                <Divider />
+            </div>
+        );
+    } else {
+        toolBar = (
+            <Toolbar>
+
+            </Toolbar>
+        );
+    }
+
+    return (
+    <div className={classes.root}>
+      
+        <AppBar
+            position="fixed"
+            className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+            })}
+        >
+            {toolBar}
+        </AppBar>
+        <Drawer
+            className={classes.drawer}
+            variant="persistent"
+            anchor="left"
+            open={open}
+            classes={{
+            paper: classes.drawerPaper,
+            }}
+        >
+            <div className={classes.drawerHeader}>
+            <IconButton onClick={handleDrawerClose}>
+                {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            </IconButton>
+            </div>
+            <Divider />
+            <div className="avatar">
                 <Avatar>
                     <AccountCircleOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
+                <Typography component="h1" variant="h6">
                     Yashvardhan Mathur
                 </Typography>
-                <List>
-                    <NavLink to="/dashboard" className={classes.navLink}>
-                        <ListItem button key="dashboard">
-                            <ListItemIcon> <DashboardIcon /> </ListItemIcon>
-                            <ListItemText primary="Dashboard" />
-                            <Divider key="dashboard" />
-                        </ListItem>
-                    </NavLink>
-                    <ListItem button key="academics">
-                        <ListItemIcon> <SchoolIcon /> </ListItemIcon>
-                        <ListItemText primary="Academics" />
-                        <Divider key="academics" />
+            </div>
+            <List>
+                <NavLink to="/dashboard" className={classes.navLink}>
+                    <ListItem button key="dashboard">
+                        <ListItemIcon> <DashboardIcon /> </ListItemIcon>
+                        <ListItemText primary="Dashboard" />
+                        <Divider key="dashboard" />
                     </ListItem>
-                    <ListItem button key="exam">
-                        <ListItemIcon> <CreateIcon/> </ListItemIcon>
-                        <ListItemText primary="Exam" />
-                        <Divider key="exam" />
-                    </ListItem>
-                </List>
-            </Drawer> 
-        </div>
+                </NavLink>
+                <ListItem button key="academics">
+                    <ListItemIcon> <SchoolIcon /> </ListItemIcon>
+                    <ListItemText primary="Academics" />
+                    <Divider key="academics" />
+                </ListItem>
+                <ListItem button key="exam">
+                    <ListItemIcon> <CreateIcon/> </ListItemIcon>
+                    <ListItemText primary="Exam" />
+                    <Divider key="exam" />
+                </ListItem>
+            </List>
+        </Drawer>
+    </div>
       );
 }
  
