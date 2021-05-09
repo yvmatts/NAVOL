@@ -1,7 +1,9 @@
+import TableComponent from "../../Components/CourseTable/TableComponent"
+import {courseList, courseCols} from '../../Pages/Academics/courses'
 const Academics = () => {
     return (  
-        <div>
-            <p>Academics page</p>
+        <div className="table">
+            <TableComponent rows={courseList} cols={courseCols}/>
         </div>
     );
 }
