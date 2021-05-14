@@ -1,5 +1,6 @@
-.table {
-    margin-left: '20px';
-    margin-right: "20px";
-    margin-top: "50px";
+.container {
+    position: relative;
+    margin-top: 120px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
