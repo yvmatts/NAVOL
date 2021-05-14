@@ -1,0 +1,46 @@
+{
+    "courses": {
+        "Air Regulations": {
+            "Quiz-1" : 45,
+            "Quiz-2" : 42,
+            "Quiz-3" : 47,
+            "Exam-1" : 89,
+            "Exam-2" : 91
+        },
+        "Aviation Meteorology": {
+            "Quiz-1" : 45,
+            "Quiz-2" : 42,
+            "Quiz-3" : 47,
+            "Exam-1" : 89,
+            "Exam-2" : 91
+        },
+        "Air Navigation": {
+            "Quiz-1" : 45,
+            "Quiz-2" : 42,
+            "Quiz-3" : 47,
+            "Exam-1" : 89,
+            "Exam-2" : 91
+        },
+        "Technical General": {
+            "Quiz-1" : 45,
+            "Quiz-2" : 42,
+            "Quiz-3" : 47,
+            "Exam-1" : 89,
+            "Exam-2" : 91
+        },
+        "Technical Specific": {
+            "Quiz-1" : 45,
+            "Quiz-2" : 42,
+            "Quiz-3" : 47,
+            "Exam-1" : 89,
+            "Exam-2" : 91
+        },
+        "Radio Telephony": {
+            "Quiz-1" : 45,
+            "Quiz-2" : 42,
+            "Quiz-3" : 47,
+            "Exam-1" : 89,
+            "Exam-2" : 91
+        }
+    }
+}
