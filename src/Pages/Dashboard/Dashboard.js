@@ -1,4 +1,4 @@
-import Scheduler from '../../Components/SchedulerComponent/Scheduler';
+import Scheduler from './Components/SchedulerComponent/Scheduler';
 
 
 const Dashboard = () => {
