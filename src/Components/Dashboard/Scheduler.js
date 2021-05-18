@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './styles/Scheduler.css'
+import 'Styles/Dashboard/Component/Scheduler.css'
 import {Inject, ScheduleComponent, Day, Week, ICalendarExport, ViewsDirective, ViewDirective, Resize, DragAndDrop } from '@syncfusion/ej2-react-schedule';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';

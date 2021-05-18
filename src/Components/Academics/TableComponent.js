@@ -1,4 +1,4 @@
-import './styles/TableComponent.css'
+import 'Styles/Academics/Component/TableComponent.css'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';

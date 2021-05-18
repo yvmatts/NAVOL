@@ -1,8 +1,8 @@
-import './styles/Academics.css';
+import 'Styles/Academics/Academics.css';
 import {useEffect, useState} from 'react';
-import TableComponent from "./Components/TableComponent/TableComponent"
+import TableComponent from "Components/Academics/TableComponent"
 import CourseList from './courses.json';
-import {getCourseList} from './Methods/CourseGetter';
+import {getCourseList} from 'Adapters/Academics/CourseGetter';
 
 const Academics = () => {
 
@@ -36,4 +36,4 @@ const Academics = () => {
     );
 }
  
-export default Academics
+export default Academics;
