@@ -4,12 +4,12 @@ import Table from 'react-bootstrap/Table';
 const TableComponent = (props) => {
     return (  
         <div className="table-container">
-            <Table striped bordered hover responsive>
+            <Table striped bordered hover responsive className="table">
             <thead>
                 <tr>
                 {
                     props.cols.map((col) => (
-                        <th key={col.name}>{col.name}</th>
+                        <th key={col.name} align="center">{col.name}</th>
                     ))
                 }
                 </tr>
