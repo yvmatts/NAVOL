@@ -7,31 +7,34 @@ import Dashboard from './Pages/Dashboard/Dashboard';
 import Academics from './Pages/Academics/Academics';
 import Exam from './Pages/Exam/Exam';
 import Profile from './Pages/Profile/Profile';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <div>
+    <div className="app-container"> 
       <Router>
         <NavBar isLoggedIn = {isLoggedIn} />
-        <Switch>
-          <Route exact path = "/">
-            {!isLoggedIn && <LoginPage isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn} />}
-          </Route>
-          <Route path = "/dashboard">
-            {isLoggedIn && <Dashboard isLoggedIn = {isLoggedIn} />}
-          </Route>
-          <Route path="/academics">
-            {isLoggedIn && <Academics isLoggedIn = {isLoggedIn} />}
-          </Route>
-          <Route path="/exam">
-            {isLoggedIn && <Exam isLoggedIn = {isLoggedIn} />}
-          </Route>
-          <Route path="/profile">
-            {isLoggedIn && <Profile isLoggedIn = {isLoggedIn} />}
-          </Route>
-        </Switch>
+        <div>
+          <Switch>
+            <Route exact path = "/">
+              {!isLoggedIn && <LoginPage isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn} />}
+            </Route>
+            <Route path = "/dashboard">
+              {isLoggedIn && <Dashboard isLoggedIn = {isLoggedIn} />}
+            </Route>
+            <Route path="/academics">
+              {isLoggedIn && <Academics isLoggedIn = {isLoggedIn} />}
+            </Route>
+            <Route path="/exam">
+              {isLoggedIn && <Exam isLoggedIn = {isLoggedIn} />}
+            </Route>
+            <Route path="/profile">
+              {isLoggedIn && <Profile isLoggedIn = {isLoggedIn} />}
+            </Route>
+          </Switch>
+        </div>
       </Router>
     </div>
   );

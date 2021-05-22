@@ -1,7 +1,17 @@
-.outerContainer {
-    margin-top: 100px;
+.outer-container {
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    grid-template-rows: repeat(4, auto);
+    grid-column-gap: 10px;
+    grid-column-gap: 10px;
 }
-.loginAvatar {
-    margin-left: auto;
-    margin-right: auto;
+
+.login-form {
+    grid-column: 3/7;
+    grid-row: 3;
+}
+
+.logo {
+    grid-column: 4/5;
+    grid-row: 2;
 }
