@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import 'Styles/Dashboard/Component/Scheduler.css'
 import {Inject, ScheduleComponent, Day, Week, ICalendarExport, ViewsDirective, ViewDirective, Resize, DragAndDrop } from '@syncfusion/ej2-react-schedule';
-import Button from '@material-ui/core/Button';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import SaveIcon from '@material-ui/icons/Save';
-//Scheduler functions
-
+import Button from 'react-bootstrap/Button';
 
 class Scheduler extends Component {
     handClick = () =>{
@@ -27,24 +23,13 @@ class Scheduler extends Component {
                 <div className="row">
                     <div className="upload_btn">
                         <Button
-                            variant="contained"
-                            startIcon={<CloudUploadIcon />}
-                        >
-                            Update
-                        </Button>
-                    </div>
-                    <div className="upload_btn">
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            startIcon={<SaveIcon />}
+                            variant="primary"
                             onClick={this.handClick}
                         >
                             Save
                         </Button>
                     </div>
-                </div>
-                
+                </div>   
             </div>
          );
     }
