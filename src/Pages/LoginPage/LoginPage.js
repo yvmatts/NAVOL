@@ -1,22 +1,26 @@
 import React from 'react';
 import 'Styles/LoginPage/LoginPage.css';
 import logo from 'Assets/Images/narainAviation.png';
-import Image from 'react-bootstrap/Image'
 import LoginForm from 'Components/LoginPage/LoginForm';
-//import Button from 'react-bootstrap/Button'
- const LoginPage = (props) => {
+import { Col, Container, Row, Image} from "react-bootstrap";
+
+
+const LoginPage = (props) => {
      const handleClick = () => {
          props.setIsLoggedIn(true);
      }
     return ( 
         <div className="outer-container">
-            <div className="logo">
-                <Image src={logo} rounded />
-            </div>
-            <div className="login-form">
-                <LoginForm handleClick={handleClick}/>
-            </div>
+            <Container className="mt-5">
+                    <Row>
+                        <Col lg={6} md={6} sm={12} className="text-center mt-4 p-3">
+                                <Image src={logo} rounded />
+                                <LoginForm handleClick={handleClick}/>
+                        </Col>
+                    </Row>
+            </Container>
         </div>
+        
     );
 }
 

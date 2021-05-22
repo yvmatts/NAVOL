@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="app-container"> 
       <Router>
-        <NavBar isLoggedIn = {isLoggedIn} />
+        {isLoggedIn && <NavBar isLoggedIn = {isLoggedIn} />}
         <div>
           <Switch>
             <Route exact path = "/">
