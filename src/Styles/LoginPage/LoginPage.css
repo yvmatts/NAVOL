@@ -1,7 +1,10 @@
-.outerContainer {
-    margin-top: 100px;
+.outer-container {
+    margin-top: 5%; 
+    margin-left: 30%;
+    margin-left: 0 auto;
 }
-.loginAvatar {
-    margin-left: auto;
-    margin-right: auto;
-}
+@media only screen and (max-width: 600px) {
+    .outer-container{
+        margin-left: 0;
+    }
+  }

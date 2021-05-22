@@ -1,8 +1,9 @@
-import 'Styles/Academics/Academics.css';
 import {useEffect, useState} from 'react';
-import TableComponent from "Components/Academics/TableComponent"
-import CourseList from './courses.json';
 import {getCourseList} from 'Adapters/Academics/CourseGetter';
+import CourseList from './courses.json';
+import TableComponent from "Components/Academics/TableComponent"
+import 'Styles/Academics/Academics.css';
+
 
 const Academics = () => {
 
@@ -13,11 +14,10 @@ const Academics = () => {
     const cols = [
         {
             name: "Component",
-            align: "left"
+            
         },
         {
             name: "Marks",
-            align: "right"
         }
     ];
 
