@@ -9,15 +9,15 @@ const AccountsTab = (props) => {
             <Form>
                 <Form.Group controlId="oldPwd">
                     <Form.Label>Old Password</Form.Label>
-                    <Form.Control type="password" placeholder="Enter old Password" />
+                    <Form.Control type="password" placeholder="Enter old Password" disabled={props.disableForm} />
                 </Form.Group>
                 <Form.Group controlId="newPwd">
                     <Form.Label>New Password</Form.Label>
-                    <Form.Control type="password" placeholder="Enter new Password" />
+                    <Form.Control type="password" placeholder="Enter new Password" disabled={props.disableForm}/>
                 </Form.Group>
                 <Form.Group controlId="confirmPwd">
                     <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control type="password" placeholder="Confirm new Password" />
+                    <Form.Control type="password" placeholder="Confirm new Password" disabled={props.disableForm}/>
                 </Form.Group>
             </Form>
         </div>
