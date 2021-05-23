@@ -1,0 +1,10 @@
+.label {
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+@media only screen and (max-width: 600px) {
+    .label{
+        margin-top: 4%;
+        margin-bottom: 3%;
+    }
+  }

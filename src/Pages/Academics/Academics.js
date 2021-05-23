@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react';
 import {getCourseList} from 'Adapters/Academics/CourseGetter';
 import CourseList from './courses.json';
-import TableComponent from "Components/Academics/TableComponent"
+import TableHeading from 'Components/Academics/TableHeading';
+import TableComponent from "Components/Academics/TableComponent";
 import 'Styles/Academics/Academics.css';
 
 
@@ -27,8 +28,8 @@ const Academics = () => {
                  &&
                 Object.keys(courses).map((courseName, index) =>(
                     <div>
-                        <p key={courseName}>{courseName}</p>
-                        <TableComponent courseInfo = {courses[courseName]} cols = {cols}/>
+                        <TableHeading courseName={courseName} teacherName={courses[courseName].Teacher}/>
+                        <TableComponent courseInfo = {courses[courseName].Components} cols = {cols}/>
                     </div>    
                 ))
             }
