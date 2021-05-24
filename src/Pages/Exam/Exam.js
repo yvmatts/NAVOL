@@ -1,6 +1,11 @@
+import ExamTabs from 'Components/Exam/ExamTabs';
+import 'Styles/Exam/Exam.css';
+
 const Exam = () => {
     return (
-        <p>This is exam page</p>
+      <div className="container">
+        <ExamTabs />
+      </div>
       );
 }
  

@@ -1,0 +1,22 @@
+.container {
+    margin: auto;
+}
+
+.subject-card-container {
+    margin-top: 2%;
+}
+@media only screen and (max-width: 600px) {
+    .subject-card-container {
+        margin-top: 4%;
+    }
+  }
+
+.subject-label {
+    margin-bottom: 2%;
+    margin-left: 1%;
+}
+@media only screen and (max-width: 600px) {
+    .subject-label {
+        margin-bottom: 4%;
+    }
+  }
