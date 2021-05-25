@@ -6,6 +6,8 @@ const ActiveTab = (props) => {
     return ( 
         <Container className="container">
             {
+                props.activeExams
+                    &&
                 Object.keys(props.activeExams).map((examInfo,index) => (
                     <div className="subject-card-container">
                         <div className="subject-label">

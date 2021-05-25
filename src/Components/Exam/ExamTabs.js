@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Tabs, Tab} from 'react-bootstrap/';
 import ActiveTab from './ActiveTab';
+import CompletedTab from './CompletedTab';
 import ExamList from './examList.json';
-import {getActiveExams} from 'Adapters/Exam/examGetter';
+import {getActiveExams,getCompletedExams} from 'Adapters/Exam/examGetter';
 
 const ExamTabs = () => {
 
@@ -11,6 +12,8 @@ const ExamTabs = () => {
 
     useEffect(() =>{
         setActiveExams(getActiveExams(ExamList));
+        setCompletedExams(getCompletedExams(ExamList));
+
     });
     return ( 
         <div className="container">
@@ -19,7 +22,7 @@ const ExamTabs = () => {
                     {activeExams && <ActiveTab activeExams={activeExams}/>}
                 </Tab>
                 <Tab eventKey="completed" title="Completed">
-                    Compl
+                    {completedExams && <CompletedTab completedExams={completedExams}/>}
                 </Tab>
             </Tabs>
         </div>
