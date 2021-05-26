@@ -1,11 +1,22 @@
 import Scheduler from 'Components/Dashboard/Scheduler';
-
+import { AppContext } from 'Context/AppContext';
 
 const Dashboard = () => {
     return (  
-        <div>
-            <Scheduler />
-        </div>
+        <AppContext.Consumer>{(context) => {
+            return(
+                <div>
+                    {
+                        context.isLoggedIn
+                            &&
+                        <div>
+                            <Scheduler />
+                        </div>
+                    }
+                </div>
+            );
+        }}
+        </AppContext.Consumer>
     );
 }
  

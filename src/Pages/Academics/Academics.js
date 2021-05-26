@@ -4,6 +4,7 @@ import CourseList from './courses.json';
 import TableHeading from 'Components/Academics/TableHeading';
 import TableComponent from "Components/Academics/TableComponent";
 import 'Styles/Academics/Academics.css';
+import { AppContext } from 'Context/AppContext';
 
 
 const Academics = () => {
@@ -23,17 +24,28 @@ const Academics = () => {
     ];
 
     return (  
-        <div className="container">
-            {   courses
-                 &&
-                Object.keys(courses).map((courseName, index) =>(
-                    <div>
-                        <TableHeading courseName={courseName} teacherName={courses[courseName].Teacher}/>
-                        <TableComponent courseInfo = {courses[courseName].Components} cols = {cols}/>
-                    </div>    
-                ))
-            }
-        </div>
+        <AppContext.Consumer>{(context) => {
+            return(
+                <div>
+                    {
+                        context.isLoggedIn
+                            &&
+                        <div className="container">
+                        {   courses
+                            &&
+                            Object.keys(courses).map((courseName, index) =>(
+                                <div>
+                                    <TableHeading courseName={courseName} teacherName={courses[courseName].Teacher}/>
+                                    <TableComponent courseInfo = {courses[courseName].Components} cols = {cols}/>
+                                </div>    
+                            ))
+                        }
+                        </div>
+                    }
+                </div>
+            )
+        }}
+        </AppContext.Consumer>
     );
 }
  
