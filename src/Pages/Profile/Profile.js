@@ -1,24 +1,21 @@
+import React, {useContext} from 'react';
 import ProfileTabs from "Components/Profile/ProfileTabs";
 import 'Styles/Profile/Profile.css';
 import { AppContext } from 'Context/AppContext';
 
 
 const Profile = () => {
+    const appContext = useContext(AppContext);
     return ( 
-        <AppContext.Consumer>{(context) => {
-            return(
-                <div>
-                    {
-                        context.isLoggedIn
-                            &&
-                        <div className="container"> 
-                            <ProfileTabs />
-                        </div> 
-                    }
-                </div>
-            );
-        }}
-        </AppContext.Consumer>
+        <div>
+        {
+            appContext.isLoggedIn
+                &&
+            <div className="container"> 
+                <ProfileTabs />
+            </div> 
+        }
+        </div>
     );
 }
  
