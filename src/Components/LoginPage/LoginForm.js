@@ -1,4 +1,4 @@
-import {Button, Form } from "react-bootstrap";
+import {Button, Form } from "react-bootstrap" 
 
 
 const LoginForm = (props) => {
@@ -26,7 +26,7 @@ const LoginForm = (props) => {
                 <Button variant="primary btn-block" type="submit">Login</Button>
             </Form>
         </div>
-     );
+     ) 
 }
  
-export default LoginForm;
+export default LoginForm 

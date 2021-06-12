@@ -1,21 +1,21 @@
-import React, { useEffect} from 'react';
-import 'Styles/NavBar/NavBar.css';
-import { MdInvertColors,MdKeyboardBackspace } from "react-icons/md";
-import { Navbar, Nav, NavDropdown} from 'react-bootstrap';
-import { Link, useHistory } from "react-router-dom";
+import React, { useEffect} from 'react' 
+import 'Styles/NavBar/NavBar.css' 
+import { MdInvertColors,MdKeyboardBackspace } from "react-icons/md" 
+import { Navbar, Nav, NavDropdown} from 'react-bootstrap' 
+import { Link, useHistory } from "react-router-dom" 
 import { connect } from 'react-redux'
 import {logout} from 'Redux/auth/authReducer'
-import {routes} from './routes';
+import {routes} from './routes' 
 
 const NavBar = (props) => {
-    const history = useHistory();
+    const history = useHistory() 
 
     useEffect(() =>{
         if(!props.isLoggedIn){
             history.push('/')
         }
 
-    },[props.isLoggedIn, history]);
+    },[props.isLoggedIn, history]) 
 
     const handleClick = async () => {
         await props.logout()
@@ -50,7 +50,7 @@ const NavBar = (props) => {
                 }
             </div>
             
-    );
+    ) 
 }
 
 const mapStateTpProps = state => {
@@ -64,4 +64,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateTpProps, mapDispatchToProps)(NavBar);
+export default connect(mapStateTpProps, mapDispatchToProps)(NavBar) 

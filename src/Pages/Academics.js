@@ -1,19 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import 'Styles/Academics/Academics.css';
-import {getCourseList} from 'Adapters/Academics/CourseGetter';
+import React, {useEffect, useState} from 'react' 
+import 'Styles/Academics/Academics.css' 
+import {getCourseList} from 'Adapters/Academics/CourseGetter' 
 import { connect } from 'react-redux'
-import CourseList from './courses.json';
-import TableHeading from 'Components/Academics/TableHeading';
-import TableComponent from "Components/Academics/TableComponent";
+import CourseList from './courses.json' 
+import TableHeading from 'Components/Academics/TableHeading' 
+import TableComponent from "Components/Academics/TableComponent" 
 
 
 
 const Academics = (props) => {
 
     useEffect(() => {
-        setCourses(getCourseList(CourseList));
-    },[]);
-    const [courses, setCourses] = useState(null);
+        setCourses(getCourseList(CourseList)) 
+    },[]) 
+    const [courses, setCourses] = useState(null) 
 
     const cols = [
         {
@@ -23,7 +23,7 @@ const Academics = (props) => {
         {
             name: "Marks",
         }
-    ];
+    ] 
 
     return (  
             <div>
@@ -43,7 +43,7 @@ const Academics = (props) => {
                     </div>
                 }
             </div>
-    );
+    ) 
 }
  
 const mapStateTpProps = state => {
@@ -52,4 +52,4 @@ const mapStateTpProps = state => {
     }
   }
   
-  export default connect(mapStateTpProps)(Academics);
+  export default connect(mapStateTpProps)(Academics) 
