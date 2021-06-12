@@ -1,20 +1,22 @@
 import './App.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import NavBar from './Components/NavBar/NavBar';
-import LoginPage from './Pages/LoginPage/LoginPage';
-import React from 'react';
-import Dashboard from './Pages/Dashboard/Dashboard';
-import Academics from './Pages/Academics/Academics';
-import Exam from './Pages/Exam/Exam';
-import Profile from './Pages/Profile/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AppContextProvider from 'Context/AppContext';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { Provider } from 'react-redux';
+import NavBar from './Components/NavBar/NavBar';
+import LoginPage from './Pages/LoginPage';
+import React from 'react';
+import Dashboard from './Pages/Dashboard';
+import Academics from './Pages/Academics';
+import Exam from './Pages/Exam';
+import Profile from './Pages/Profile';
+import store from 'Redux/store';
+
 
 function App() {
   return (
     <div className="app-container"> 
       <Router>
-        <AppContextProvider>
+        <Provider store={store}>     
             <NavBar />
             <div>
               <Switch>
@@ -35,7 +37,7 @@ function App() {
                 </Route>
               </Switch>
             </div>
-        </AppContextProvider>
+        </Provider>  
       </Router>
     </div>
   );

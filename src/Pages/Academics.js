@@ -1,19 +1,20 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState} from 'react';
+import 'Styles/Academics/Academics.css';
 import {getCourseList} from 'Adapters/Academics/CourseGetter';
+import { connect } from 'react-redux'
 import CourseList from './courses.json';
 import TableHeading from 'Components/Academics/TableHeading';
 import TableComponent from "Components/Academics/TableComponent";
-import 'Styles/Academics/Academics.css';
-import { AppContext } from 'Context/AppContext';
 
 
-const Academics = () => {
+
+const Academics = (props) => {
 
     useEffect(() => {
         setCourses(getCourseList(CourseList));
     },[]);
     const [courses, setCourses] = useState(null);
-    const appContext = useContext(AppContext);
+
     const cols = [
         {
             name: "Component",
@@ -27,7 +28,7 @@ const Academics = () => {
     return (  
             <div>
                 {
-                    appContext.isLoggedIn
+                    props.isLoggedIn
                         &&
                     <div className="container">
                     {   courses
@@ -45,4 +46,10 @@ const Academics = () => {
     );
 }
  
-export default Academics;
+const mapStateTpProps = state => {
+    return {
+        isLoggedIn : state.auth.isLoggedIn
+    }
+  }
+  
+  export default connect(mapStateTpProps)(Academics);
