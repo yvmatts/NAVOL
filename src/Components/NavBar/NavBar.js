@@ -4,7 +4,7 @@ import { MdInvertColors,MdKeyboardBackspace } from "react-icons/md"
 import { Navbar, Nav, NavDropdown} from 'react-bootstrap' 
 import { Link, useHistory } from "react-router-dom" 
 import { connect } from 'react-redux'
-import {logout} from 'Redux/auth/authReducer'
+//import {logout} from 'Redux/auth/authReducer'
 import {routes} from './routes' 
 
 const NavBar = (props) => {
@@ -18,7 +18,7 @@ const NavBar = (props) => {
     },[props.isLoggedIn, history]) 
 
     const handleClick = async () => {
-        await props.logout()
+        //await props.logout()
     }
     return (
             <div>
@@ -60,7 +60,7 @@ const mapStateTpProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        logout : () => dispatch(logout())
+        // logout : () => dispatch(logout())
     }
 }
 
