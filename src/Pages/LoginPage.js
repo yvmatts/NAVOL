@@ -1,26 +1,22 @@
-import React, {useState, useEffect} from 'react' 
+import React, {useEffect} from 'react' 
 import { useHistory } from "react-router-dom" 
 import { Container, Image} from "react-bootstrap" 
-import { connect } from 'react-redux'
-import { fetchAuth } from 'Redux/auth/authAction'
 
 import 'Styles/LoginPage/LoginPage.css' 
 import logo from 'Assets/Images/narainAviation.png' 
 import LoginForm from 'Components/LoginPage/LoginForm' 
 import LoginAlert from 'Components/LoginPage/LoginAlert' 
-import RegistrationForm from 'Components/LoginPage/Registration'
+import RegistrationForm from 'Components/LoginPage/RegistrationForm'
+import {Button} from "react-bootstrap" 
 
-const LoginPage = (props) => {
-    const [validated, setValidated] = useState(false)  
-    const [email, setEmail] = useState('') 
-    const [password, setPassword] = useState('')
-    const [showAlert, setShowAlert] = useState(false)
-    const [showRegister, setShowRegister] = useState(true)
-    const [loginCount, setLoginCount] = useState(0)
+//Redux Imports
+import { connect } from 'react-redux'
+import { fetchAuth } from 'Redux/auth/authAction'
+import { handleAlert, handleFormValidation, handleShowRegister} from 'Redux/loginPage/loginPageActions'
 
+const LoginPage = (props) => { 
+    
     const history = useHistory() 
-    const bcryptjs = require('bcryptjs') 
-    const saltRounds = 10
     
 /**
  * @hook useEffect
@@ -33,72 +29,54 @@ const LoginPage = (props) => {
             history.push('/dashboard')
         }
         if(props.error) {
-            handleAlertClose(true)
+            props.handleAlert(true)
         }
-    },[props.isLoggedIn, history, props.error]) 
+    },[props.isLoggedIn, props.error,props.handleAlert, history]) 
 
 /**
- * @function handleAlertClose
- * @description Handles alert visibilty AND form vaildation reset
- * @params flag {boolean}
+ * @function handleForms
+ * @description Handles displaying of forms
+ * @params null
  * @returns null
  */
-    const handleAlertClose = (flag) => {
-        setShowAlert(flag)
-        setValidated(false)
+    const handleForms = () => {
+       props.handleShowRegister() 
     }
 
 /**
- * @function handleChange
- * @description Handles form input states
- * @params e {event}
- * @returns null
- */
-    const handleChange = (e) => {
-        switch (e.target.form.id) {
-            case 'login_form':
-                switch (e.target.id) {
-                    case 'login_email':
-                        setEmail(e.target.value)
-                        break 
-                    case 'login_password':
-                        bcryptjs.genSalt(saltRounds, function(err, salt) {
-                            bcryptjs.hash(e.target.value, salt, function(err, hash) {
-                                setPassword(hash)
-                            }) 
-                        }) 
-                        
-                        break 
-                    default:
-                        break 
-                }
-                break 
-        
-            default:
-                break 
-        }
-    }
-
-/**
- * @function handleSubmit
+ * @function handleLogin
  * @description Handles form submission
  * @params event {event}
  * @returns null
  */
-    const handleSubmit = async (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault()
-        handleAlertClose(false) 
+        props.handleAlert(false) 
         const form = event.currentTarget 
         if (form.checkValidity() === false) {
-          event.stopPropagation() 
-         
+            event.stopPropagation() 
         } else {
             console.log('valid form') 
-            await props.fetchAuth(email, password)
-            setLoginCount(loginCount+1)
+            await props.fetchAuth(props.email, props.password)
         }
-        setValidated(true) 
-      } 
+        props.handleFormValidation(true) 
+      }
+      
+/**
+ * @function handleLogin
+ * @description Handles form submission
+ * @params event {event}
+ * @returns null
+ */
+    const handleRegister = async (event) => {
+        event.preventDefault()
+        props.handleAlert(false) 
+        const form = event.currentTarget 
+        if (form.checkValidity() === false) {
+            event.stopPropagation() 
+        }
+        props.handleFormValidation(true) 
+      }
     
     return ( 
         <div>
@@ -107,17 +85,32 @@ const LoginPage = (props) => {
                         &&
                 <Container>
                     <div className="d-flex justify-content-center align-items-center">
-                    <div>
-                        <div className="logo">
-                            <Image src={logo} rounded />
-                        </div>
                         <div>
-                            <LoginAlert showAlert={showAlert} handleAlertClose={handleAlertClose}/>
+                            <div className="logo">
+                                <Image src={logo} rounded />
+                            </div>
+                            <div>
+                                <LoginAlert />
+                            </div>
+                            <div>
+                                {   props.showRegister?
+                                        <div>
+                                            <RegistrationForm handleRegister={handleRegister}/>
+                                        </div>
+                                    :   <div>
+                                            <LoginForm handleLogin={handleLogin} />
+                                        </div>
+                                }
+                            </div>
+                            <div className="d-flex justify-content-center align-items-center">
+                                <div> 
+                                    <Button variant="link" onClick={handleForms}>{props.showRegister? "Back to login" : "New user? Register here"}</Button>
+                                </div>
+                            </div>
                         </div>
-                            {   showRegister?
-                                <RegistrationForm />
-                                :<LoginForm handleSubmit={handleSubmit} handleChange={handleChange} validated={validated}/>}
-                        </div>
+                    <div>
+                                
+                            </div>
                     </div>
                 </Container>
             }
@@ -128,12 +121,20 @@ const LoginPage = (props) => {
 const mapStateTpProps = state => {
     return {
         isLoggedIn : state.auth.isLoggedIn,
-        error : state.auth.error
+        error : state.auth.error,
+        email : state.login.email,
+        password: state.login.password,
+        showRegister: state.login.showRegister,
+        showAlert: state.login.showAlert,
+        validated: state.login.validated
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAuth: (email, password) => dispatch(fetchAuth(email, password))
+        fetchAuth: (email, password) => dispatch(fetchAuth(email, password)),
+        handleAlert: (flag) => dispatch(handleAlert(flag)),
+        handleFormValidation: (flag) => dispatch(handleFormValidation(flag)),
+        handleShowRegister: () => dispatch(handleShowRegister())
     }
 }
 export default connect(mapStateTpProps, mapDispatchToProps)(LoginPage) 
