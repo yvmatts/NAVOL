@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const authRoutes = require('./routes/auth/authRoutes')
-const dbURI = 'mongodb+srv://dev:laFseYp7RvVoWeiY@cluster0.7akme.mongodb.net/Navol?retryWrites=true&w=majority'
+const dbURI = 'mongodb+srv://<user:pass>@cluster0.7akme.mongodb.net/Navol?retryWrites=true&w=majority'
 const cors = require('cors')
 
 const port = process.env.PORT || 8000
