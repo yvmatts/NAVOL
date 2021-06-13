@@ -1,14 +1,14 @@
 import {
-    FETCH_AUTH_REQUEST,
-    FETCH_AUTH_SUCCESS,
-    FETCH_AUTH_FAILURE
-  } from './authTypes'
+  FETCH_AUTH_REQUEST,
+  FETCH_AUTH_SUCCESS,
+  FETCH_AUTH_FAILURE
+} from './authTypes'
 
   const initialState = {
     isLoggedIn: false,
     loading: false,
-    users: [],
-    error: false
+    user: null,
+    error: null
   }
   
   const authReducer = (state = initialState, action) => {
@@ -22,14 +22,14 @@ import {
         return {
             isLoggedIn: true,
             loading: false,
-            users: action.payload,
+            user: action.payload,
             error: ''
         }
       case FETCH_AUTH_FAILURE:
         return {
             isLoggedIn: false,
             loading: false,
-            users: [],
+            user: null,
             error: action.payload
         }
       default: return state

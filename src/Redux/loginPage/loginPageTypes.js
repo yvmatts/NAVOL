@@ -1,4 +1,3 @@
-export const HANDLE_SUBMIT = 'HANDLE_SUBMIT'
 export const HANDLE_EMAIL = 'HANDLE_EMAIL'
 export const HANDLE_PASSWORD = 'HANDLE_PASSWORD'
 export const HANDLE_ALERT = 'HANDLE_ALERT'

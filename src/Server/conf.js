@@ -1,0 +1,1 @@
+module.exports.dbURI = "mongodb+srv://dev:laFseYp7RvVoWeiY@cluster0.7akme.mongodb.net/Navol?retryWrites=true&w=majority"

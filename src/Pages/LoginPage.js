@@ -11,7 +11,7 @@ import {Button} from "react-bootstrap"
 
 //Redux Imports
 import { connect } from 'react-redux'
-import { fetchAuth } from 'Redux/auth/authAction'
+import { fetchAuth, fetchRegister } from 'Redux/auth/authAction'
 import { handleAlert, handleFormValidation, handleShowRegister} from 'Redux/loginPage/loginPageActions'
 
 const LoginPage = (props) => { 
@@ -45,7 +45,7 @@ const LoginPage = (props) => {
 
 /**
  * @function handleLogin
- * @description Handles form submission
+ * @description Handles login form submission
  * @params event {event}
  * @returns null
  */
@@ -56,15 +56,14 @@ const LoginPage = (props) => {
         if (form.checkValidity() === false) {
             event.stopPropagation() 
         } else {
-            console.log('valid form') 
             await props.fetchAuth(props.email, props.password)
         }
         props.handleFormValidation(true) 
       }
       
 /**
- * @function handleLogin
- * @description Handles form submission
+ * @function handleRegister
+ * @description Handles registration form submission
  * @params event {event}
  * @returns null
  */
@@ -74,6 +73,8 @@ const LoginPage = (props) => {
         const form = event.currentTarget 
         if (form.checkValidity() === false) {
             event.stopPropagation() 
+        }else {
+            await props.fetchRegister(props.email, props.password)
         }
         props.handleFormValidation(true) 
       }
@@ -132,6 +133,7 @@ const mapStateTpProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchAuth: (email, password) => dispatch(fetchAuth(email, password)),
+        fetchRegister: (email, password) => dispatch(fetchRegister(email, password)),
         handleAlert: (flag) => dispatch(handleAlert(flag)),
         handleFormValidation: (flag) => dispatch(handleFormValidation(flag)),
         handleShowRegister: () => dispatch(handleShowRegister())
