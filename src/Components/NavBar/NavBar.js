@@ -1,22 +1,29 @@
-import React, {useContext} from 'react';
-import { Link, useHistory } from "react-router-dom";
-import {routes} from './routes';
-import 'Styles/NavBar/NavBar.css';
-import { MdInvertColors,MdKeyboardBackspace } from "react-icons/md";
-import { Navbar, Nav, NavDropdown} from 'react-bootstrap';
-import { AppContext } from 'Context/AppContext';
+import React, { useEffect} from 'react' 
+import 'Styles/NavBar/NavBar.css' 
+import { MdInvertColors,MdKeyboardBackspace } from "react-icons/md" 
+import { Navbar, Nav, NavDropdown} from 'react-bootstrap' 
+import { Link, useHistory } from "react-router-dom" 
+import { connect } from 'react-redux'
+//import {logout} from 'Redux/auth/authReducer'
+import {routes} from './routes' 
 
-const NavBar = () => {
-    const history = useHistory();
-    const appContext = useContext(AppContext);
-    const handleClick = () => {
-        appContext.toggleAuth();
-        history.push("/");
+const NavBar = (props) => {
+    const history = useHistory() 
+
+    useEffect(() =>{
+        if(!props.isLoggedIn){
+            history.push('/')
+        }
+
+    },[props.isLoggedIn, history]) 
+
+    const handleClick = async () => {
+        //await props.logout()
     }
     return (
             <div>
                 {
-                    appContext.isLoggedIn
+                    props.isLoggedIn
                         &&
                     <div>
                         <Navbar bg="primary" variant="dark" expand="lg">
@@ -43,7 +50,18 @@ const NavBar = () => {
                 }
             </div>
             
-    );
+    ) 
 }
- 
-export default NavBar;
+
+const mapStateTpProps = state => {
+    return {
+        isLoggedIn : state.auth.isLoggedIn
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        // logout : () => dispatch(logout())
+    }
+}
+
+export default connect(mapStateTpProps, mapDispatchToProps)(NavBar) 

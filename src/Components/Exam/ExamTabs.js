@@ -14,7 +14,7 @@ const ExamTabs = () => {
         setActiveExams(getActiveExams(ExamList));
         setCompletedExams(getCompletedExams(ExamList));
 
-    });
+    },[]);
     return ( 
         <div className="container">
             <Tabs defaultActiveKey="active" id="uncontrolled-tab-example">

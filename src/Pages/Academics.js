@@ -1,19 +1,20 @@
-import React, {useEffect, useState, useContext} from 'react';
-import {getCourseList} from 'Adapters/Academics/CourseGetter';
-import CourseList from './courses.json';
-import TableHeading from 'Components/Academics/TableHeading';
-import TableComponent from "Components/Academics/TableComponent";
-import 'Styles/Academics/Academics.css';
-import { AppContext } from 'Context/AppContext';
+import React, {useEffect, useState} from 'react' 
+import 'Styles/Academics/Academics.css' 
+import {getCourseList} from 'Adapters/Academics/CourseGetter' 
+import { connect } from 'react-redux'
+import CourseList from './courses.json' 
+import TableHeading from 'Components/Academics/TableHeading' 
+import TableComponent from "Components/Academics/TableComponent" 
 
 
-const Academics = () => {
+
+const Academics = (props) => {
 
     useEffect(() => {
-        setCourses(getCourseList(CourseList));
-    },[]);
-    const [courses, setCourses] = useState(null);
-    const appContext = useContext(AppContext);
+        setCourses(getCourseList(CourseList)) 
+    },[]) 
+    const [courses, setCourses] = useState(null) 
+
     const cols = [
         {
             name: "Component",
@@ -22,12 +23,12 @@ const Academics = () => {
         {
             name: "Marks",
         }
-    ];
+    ] 
 
     return (  
             <div>
                 {
-                    appContext.isLoggedIn
+                    props.isLoggedIn
                         &&
                     <div className="container">
                     {   courses
@@ -42,7 +43,13 @@ const Academics = () => {
                     </div>
                 }
             </div>
-    );
+    ) 
 }
  
-export default Academics;
+const mapStateTpProps = state => {
+    return {
+        isLoggedIn : state.auth.isLoggedIn
+    }
+  }
+  
+  export default connect(mapStateTpProps)(Academics) 

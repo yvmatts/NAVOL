@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react' 
 import 'Styles/Dashboard/Component/Scheduler.css'
-import {Inject, ScheduleComponent, Day, Week, ICalendarExport, ViewsDirective, ViewDirective, Resize, DragAndDrop } from '@syncfusion/ej2-react-schedule';
-import Button from 'react-bootstrap/Button';
+import {Inject, ScheduleComponent, Day, Week,WorkWeek,Agenda,Month,MonthAgenda, ICalendarExport, ViewsDirective, ViewDirective, Resize, DragAndDrop } from '@syncfusion/ej2-react-schedule' 
+import Button from 'react-bootstrap/Button' 
 
 class Scheduler extends Component {
     handClick = () =>{
-        this.scheduleObj.exportToICalendar();
+        this.scheduleObj.exportToICalendar() 
     }
     render() { 
         return ( 
@@ -18,7 +18,7 @@ class Scheduler extends Component {
                         <ViewDirective option='Month'/>
                         <ViewDirective option='Agenda'/>
                     </ViewsDirective>
-                    <Inject services={[Day,Week,ICalendarExport,Resize,DragAndDrop]} />
+                    <Inject services={[Day,Week,WorkWeek,Agenda,Month,MonthAgenda,ICalendarExport,Resize,DragAndDrop]} />
                 </ScheduleComponent>
                 <div className="row">
                     <div className="upload_btn">
@@ -31,8 +31,8 @@ class Scheduler extends Component {
                     </div>
                 </div>   
             </div>
-         );
+         ) 
     }
 }
  
-export default Scheduler;
+export default Scheduler 
