@@ -34,6 +34,27 @@ export const fetchAuthFailure = error => {
 
 /**
  * 
+ * LOGIN ASYNC ACTION CREATOR
+ * 
+ */
+ export const fetchAuth = (email, password) => {
+  return (dispatch) => {
+    dispatch(fetchAuthRequest())
+    axios.post('http://localhost:8000/login', {
+        email: email,
+        password: password
+      })
+      .then(function (response) {
+        dispatch(fetchAuthSuccess(response))
+      })
+      .catch(function (error) {
+        dispatch(fetchAuthFailure(error))
+      });
+  }
+}
+
+/**
+ * 
  * REGISTRATION ASYNC ACTION CREATOR
  * 
  */
@@ -47,27 +68,6 @@ export const fetchAuthFailure = error => {
       })
       .then(function (response) {
         dispatch(fetchAuthSuccess(response.data))
-      })
-      .catch(function (error) {
-        dispatch(fetchAuthFailure(error))
-      });
-  }
-}
-
-/**
- * 
- * LOGIN ASYNC ACTION CREATOR
- * 
- */
- export const fetchAuth = (email, password) => {
-  return (dispatch) => {
-    dispatch(fetchAuthRequest())
-    axios.post('http://localhost:8000/login', {
-        email: email,
-        password: password
-      })
-      .then(function (response) {
-        dispatch(fetchAuthSuccess(response))
       })
       .catch(function (error) {
         dispatch(fetchAuthFailure(error))

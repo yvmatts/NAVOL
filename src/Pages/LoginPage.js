@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react' 
 import { useHistory } from "react-router-dom" 
-import { Container, Image} from "react-bootstrap" 
 
 import 'Styles/LoginPage/LoginPage.css' 
 import logo from 'Assets/Images/narainAviation.png' 
@@ -8,6 +7,7 @@ import LoginForm from 'Components/LoginPage/LoginForm'
 import LoginAlert from 'Components/LoginPage/LoginAlert' 
 import RegistrationForm from 'Components/LoginPage/RegistrationForm'
 import {Button} from "react-bootstrap" 
+import { Container, Image } from "react-bootstrap" 
 
 //Redux Imports
 import { connect } from 'react-redux'
@@ -53,6 +53,7 @@ const LoginPage = (props) => {
         event.preventDefault()
         props.handleAlert(false) 
         const form = event.currentTarget 
+        
         if (form.checkValidity() === false) {
             event.stopPropagation() 
         } else {
@@ -71,6 +72,7 @@ const LoginPage = (props) => {
         event.preventDefault()
         props.handleAlert(false) 
         const form = event.currentTarget 
+        
         if (form.checkValidity() === false) {
             event.stopPropagation() 
         }else {
