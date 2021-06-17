@@ -70,7 +70,13 @@ export const fetchAuthFailure = error => {
         dispatch(fetchAuthSuccess(response.data))
       })
       .catch(function (error) {
-        dispatch(fetchAuthFailure(error))
+        if(error.response.data.email) {
+          dispatch(fetchAuthFailure(error.response.data.email))
+        } else if(error.response.data.password) {
+          dispatch(fetchAuthFailure(error.response.data.password))
+        } else {
+          dispatch(fetchAuthFailure('Something went wrong.'))
+        }
       });
   }
 }
