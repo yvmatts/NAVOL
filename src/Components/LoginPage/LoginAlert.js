@@ -15,7 +15,7 @@ const LoginAlert = (props) =>{
                     props.showAlert
                         &&
                     <Alert variant="danger" onClose={handleClose} dismissible>
-                        Invalid credentials.
+                        {props.error}
                     </Alert>
                 }
           </div>
@@ -25,7 +25,8 @@ const LoginAlert = (props) =>{
 
 const mapStateTpProps = state => {
     return {
-        showAlert: state.login.showAlert
+        showAlert: state.login.showAlert,
+        error: state.auth.error
     }
 }
 const mapDispatchToProps = dispatch => {
