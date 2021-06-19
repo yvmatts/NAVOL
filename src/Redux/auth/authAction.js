@@ -3,8 +3,24 @@ import {
   FETCH_AUTH_REQUEST,
   FETCH_AUTH_SUCCESS,
   FETCH_AUTH_FAILURE,
+  FETCH_LOGOUT
 } from './authTypes'
 
+/**
+ * 
+ * Helper functions
+ * 
+ */
+
+const handleErrors = (error) => {
+  if(error.response.data.email) {
+    return(error.response.data.email)
+  } else if(error.response.data.password) {
+    return(error.response.data.password)
+  } else {
+    return('Something went wrong.')
+  }
+}
 
 /**
  * 
@@ -18,10 +34,13 @@ export const fetchAuthRequest = () => {
   }
 }
 
-export const fetchAuthSuccess = user => {
+export const fetchAuthSuccess = (user, redirectUrl) => {
   return {
     type: FETCH_AUTH_SUCCESS,
-    payload: user
+    payload: {
+      user: user,
+      redirectUrl: redirectUrl
+    }
   }
 }
 
@@ -29,6 +48,15 @@ export const fetchAuthFailure = error => {
   return {
     type: FETCH_AUTH_FAILURE,
     payload: error
+  }
+}
+
+export const fetchLogout = (redirectUrl) => {
+  return {
+    type: FETCH_LOGOUT,
+    payload: {
+      redirectUrl: redirectUrl
+    }
   }
 }
 
@@ -45,10 +73,12 @@ export const fetchAuthFailure = error => {
         password: password
       })
       .then(function (response) {
-        dispatch(fetchAuthSuccess(response))
+        dispatch(fetchAuthSuccess(response.data, '/dashboard'
+        ))
       })
       .catch(function (error) {
-        dispatch(fetchAuthFailure(error))
+        const errMessage = handleErrors(error)
+        dispatch(fetchAuthFailure(errMessage))
       });
   }
 }
@@ -67,16 +97,27 @@ export const fetchAuthFailure = error => {
         password: password
       })
       .then(function (response) {
-        dispatch(fetchAuthSuccess(response.data))
+        dispatch(fetchAuthSuccess(response.data,'/profile'))
       })
       .catch(function (error) {
-        if(error.response.data.email) {
-          dispatch(fetchAuthFailure(error.response.data.email))
-        } else if(error.response.data.password) {
-          dispatch(fetchAuthFailure(error.response.data.password))
-        } else {
-          dispatch(fetchAuthFailure('Something went wrong.'))
-        }
+        const errMessage = handleErrors(error)
+        dispatch(fetchAuthFailure(errMessage))
       });
+  }
+}
+
+/**
+ * 
+ * LOGOUT ASYNC ACTION CREATOR
+ * 
+ */
+
+export const fetchLogoutRequest = () => {
+  return (dispatch) => {
+    axios.get('http://localhost:8000/logout')
+      .then(function(response) {
+
+        dispatch(fetchLogout(response.data))
+      })
   }
 }

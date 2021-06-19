@@ -4,9 +4,6 @@ HANDLE_EMAIL,
 HANDLE_PASSWORD,
 HANDLE_SHOW_REGISTER} from './loginPageTypes'
 
-const bcryptjs = require('bcryptjs') 
-const saltRounds = 10
-
 const initialState = {
     validated: false,
     email: '',
@@ -27,7 +24,7 @@ const loginPageReducer = (state = initialState, action) => {
         case HANDLE_PASSWORD:
             return {
                 ...state,
-                password: bcryptjs.hashSync(action.payload.password, saltRounds)
+                password: action.payload.password
             }
         
         case HANDLE_ALERT:
