@@ -1,0 +1,47 @@
+.card-container {
+    margin-left: 1%;
+}
+@media only screen and (max-width: 600px) {
+    .card-container {
+        margin-left: 0%;
+        margin-right: 2%;
+    }
+  }
+
+.card {
+    width: 14rem;
+}
+@media only screen and (max-width: 600px) {
+    .card {
+        width: 10rem;
+    }
+  }
+
+.card-content {
+    text-align: center;
+}  
+  
+.scroll {
+    max-height: 16rem;
+    display: flex;
+    overflow-x: scroll;
+    white-space: wrap;
+}
+@media only screen and (max-width: 600px) {
+    .scroll {
+        width: 18rem;
+        max-height: 19rem;
+    }
+  }
+.scroll::-webkit-scrollbar {
+    width: 0px;
+}
+
+.scroll-container {
+    width: 105vh;
+}
+@media only screen and (max-width: 600px) {
+    .scroll-container {
+        width: 30vh;
+    }
+  }
