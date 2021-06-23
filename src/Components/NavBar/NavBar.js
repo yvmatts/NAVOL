@@ -1,24 +1,26 @@
 import React, { useEffect} from 'react' 
 import 'Styles/NavBar/NavBar.css' 
 import { MdInvertColors,MdKeyboardBackspace } from "react-icons/md" 
-import { Navbar, Nav, NavDropdown} from 'react-bootstrap' 
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap' 
 import { Link, useHistory } from "react-router-dom" 
 import { connect } from 'react-redux'
-//import {logout} from 'Redux/auth/authReducer'
 import {routes} from './routes' 
+import { fetchLogoutRequest } from 'Redux/auth/authAction'
+import { handleFormValidation } from 'Redux/loginPage/loginPageActions'
 
 const NavBar = (props) => {
     const history = useHistory() 
 
     useEffect(() =>{
         if(!props.isLoggedIn){
-            history.push('/')
+            history.push(props.redirectUrl)
         }
 
     },[props.isLoggedIn, history]) 
 
     const handleClick = async () => {
-        //await props.logout()
+        await props.fetchLogoutRequest()
+        props.handleFormValidation(false)
     }
     return (
             <div>
@@ -55,12 +57,14 @@ const NavBar = (props) => {
 
 const mapStateTpProps = state => {
     return {
-        isLoggedIn : state.auth.isLoggedIn
+        isLoggedIn : state.auth.isLoggedIn,
+        redirectUrl: state.auth.redirectUrl
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        // logout : () => dispatch(logout())
+        fetchLogoutRequest : () => dispatch(fetchLogoutRequest()),
+        handleFormValidation: (flag) => dispatch(handleFormValidation(flag))
     }
 }
 

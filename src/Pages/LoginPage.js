@@ -26,7 +26,7 @@ const LoginPage = (props) => {
  */
     useEffect(() =>{
         if(props.isLoggedIn){
-            history.push('/dashboard')
+            history.push(props.redirectUrl)
         }
         if(props.error) {
             props.handleAlert(true)
@@ -129,7 +129,8 @@ const mapStateTpProps = state => {
         password: state.login.password,
         showRegister: state.login.showRegister,
         showAlert: state.login.showAlert,
-        validated: state.login.validated
+        validated: state.login.validated,
+        redirectUrl: state.auth.redirectUrl
     }
 }
 const mapDispatchToProps = dispatch => {
