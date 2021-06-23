@@ -1,6 +1,7 @@
 const User = require('../../models/user')
 const jwt = require('jsonwebtoken')
 const conf = require('../../conf')
+const path = require('path')
 
 const handleErrors = (err) => {
     let errors = {email: null, password: null}  
@@ -32,7 +33,32 @@ const createToken = (id) => {
   })
 }
 
-module.exports.login  = async (req, res) => {
+/**
+ * Login Get
+ * @param {redirectUrl} res 
+ */
+module.exports.login_get = (req,res) => {
+  console.log(path.join(__dirname,'../../build', 'index.html'))
+  res.sendFile(path.join(__dirname,'../../build', 'index.html'))
+}
+
+/**
+ * Logout Post
+ * @param {email, password} req 
+ * @param {user._id} res 
+ */
+ module.exports.logout_get = (req, res) => {
+  const logoutUrl = '/'
+  res.cookie('jwt', '', { maxAge: 1 });
+  res.status(201).json(logoutUrl);
+}
+
+/**
+ * Login Post
+ * @param {email, password} req 
+ * @param {user._id} res 
+ */
+module.exports.login_post  = async (req, res) => {
     const { email, password } = req.body
   try {
     const user = await User.login(email, password)
@@ -45,7 +71,12 @@ module.exports.login  = async (req, res) => {
   }
 }
 
-module.exports.register  = async(req, res) => {
+/**
+ * Register Post
+ * @param {email, password} req 
+ * @param {user._id} res 
+ */
+module.exports.register_post  = async(req, res) => {
     const {email, password} = req.body
     try{
         const user = await User.create({email,password})
@@ -56,10 +87,4 @@ module.exports.register  = async(req, res) => {
         const errors = handleErrors(err)
         res.status(403).send(errors)
     }
-}
-
-module.exports.logout = (req, res) => {
-  const logoutUrl = '/'
-  res.cookie('jwt', '', { maxAge: 1 });
-  res.status(201).json(logoutUrl);
 }
