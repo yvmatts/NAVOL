@@ -10,7 +10,8 @@ import {
     loading: false,
     user: null,
     error: null,
-    redirectUrl: ''
+    redirectUrl: '',
+    userLevel: 'student'
   }
   
   const authReducer = (state = initialState, action) => {
@@ -39,6 +40,7 @@ import {
         }
       case FETCH_LOGOUT:
         return {
+          ...state,
           isLoggedIn: false,
           loading: false,
           user: null,
