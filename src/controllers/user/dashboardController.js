@@ -19,6 +19,21 @@ module.exports.schedule_post = async (req, res) => {
             res.send('Scheduler updated')
         }
     } catch(err) {
-        console.log(err)
+        res.json({error: 'Unable to update schedule'})
+    }
+}  
+
+module.exports.schedule_get = async (req, res) => {
+    try {
+        const studentId = jwt_decode(req.cookies.jwt).id
+        const student = await studentSchedule.findOne({studentId})
+        if(student) {
+            const schedule = student.schedule
+            res.json({schedule: schedule})
+        } else {
+            res.json({schedule: []})
+        }
+    } catch(err) {
+        res.json({error: 'Unable to update schedule'})
     }
 }

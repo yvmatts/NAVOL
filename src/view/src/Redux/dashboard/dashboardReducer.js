@@ -6,35 +6,40 @@ import {
 } from "./dashboardTypes"
 
 const initialState = {
-    schedule: null,
-    error: null
+    schedule: [],
+    error: null,
+    loading: false
 }
 
 const dashboardReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case HANDLE_SCHEDULE:
+            state.schedule = []
             return {
                 ...state,
-                schedule: action.payload.schedule
+                schedule: [...action.payload.schedule]
             }
             
         case UPDATE_SCHEDULE_REQUEST:
             return {
                 ...state,
-                error: null
+                error: null,
+                loading: true
             } 
 
         case UPDATE_SCHEDULE_SUCCESS:
             return {
                 ...state,
                 error: null,
+                loading: false
             }
         
         case UPDATE_SCHEDULE_ERROR:
             return {
                 ...state,
-                error: action.payload.error
+                error: action.payload.error,
+                loading: false
             }
 
         default:

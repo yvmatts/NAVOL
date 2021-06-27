@@ -3,12 +3,25 @@ import 'Styles/Dashboard/Component/Scheduler.css'
 import Button from 'react-bootstrap/Button'
 
 import { connect } from 'react-redux'
-import { handleSchedule, updateSchedule } from 'Redux/dashboard/dashboardActions'
+import { handleSchedule, updateSchedule, fetchSchedule } from 'Redux/dashboard/dashboardActions'
 
 import { Inject, ScheduleComponent, Day, Week,Agenda,Month,MonthAgenda, ICalendarExport, ViewsDirective, ViewDirective, Resize, DragAndDrop } from '@syncfusion/ej2-react-schedule' 
 import { L10n } from '@syncfusion/ej2-base'
 
 const Scheduler = (props) => {
+
+    const [scheduleObj, setScheduleObj] = useState() //Local state used to set schedule prop of Redux store
+
+/**
+ * @hook useEffect
+ * @description fetches the schedule on page load
+ * @params null
+ * @returns null
+ */
+    useEffect(() => {
+        props.fetchSchedule()
+    },[])
+
 /**
  * @function L10n.load (imported from Scheduler package)
  * @description Customizes the Scheduler button text 
@@ -23,11 +36,6 @@ const Scheduler = (props) => {
         }
     })
 
-    const [scheduleObj, setScheduleObj] = useState()
-
-    //  useEffect(() => {
-    //     scheduleObj && console.log(scheduleObj.dataModule.dataManager.dataSource.json)
-    // },[scheduleObj])
     
 /**
  * @function handleSave
@@ -36,13 +44,12 @@ const Scheduler = (props) => {
  * @returns null
  */
     const handleSave = async () =>{
-        console.log(scheduleObj.dataModule.dataManager.dataSource.json)
         await props.handleSchedule(scheduleObj.dataModule.dataManager.dataSource.json)
         await props.updateSchedule(props.schedule)
      }
     return (  
         <div>
-            <ScheduleComponent width='100%' height='650px' ref={schedule => setScheduleObj(schedule)}>
+            <ScheduleComponent width='100%' height='650px' ref={schedule => setScheduleObj(schedule)} eventSettings={{ dataSource: props.schedule || [] }}>
                 <ViewsDirective>
                     <ViewDirective option='Day'/>
                     <ViewDirective option='Week'/>
@@ -78,7 +85,8 @@ const mapStateTpProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         handleSchedule: (schedule) => dispatch(handleSchedule(schedule)),
-        updateSchedule: (schedule) => dispatch(updateSchedule(schedule))
+        updateSchedule: (schedule) => dispatch(updateSchedule(schedule)),
+        fetchSchedule : () => dispatch(fetchSchedule())
     }
 }
  
